@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Side Functionality</title>
+  <style>
+    body {
+      background-color: #353535;
+      color: #ffff;
+    }
+    .title {
+      color: aqua;
+      text-align: center;
+      margin: 1rem auto;
+    }
+    .coords-box {
+      width: 90vw;
+      border: 2px solid aqua;
+      min-height: 50vh;
+      padding: 1.5rem;
+      margin: 2rem auto;
+    }
+    .lat {
+      color:chartreuse;
+    }
+    .long {
+      color:coral;
+    }
+    .submit-btn {
+      text-align: center;
+      margin: 2rem auto;
+    }
+    .fetch-btn {
+      background-color: darkblue;
+      color: aqua;
+      border: 1.5px solid aqua;
+      padding: 0.3rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+  </style>
+<!-- <script defer src="./publ.js"></script> -->
+</head>
+<body>
+  <h1 class="title">Welcome to the Back End Server</h1>
+
+  <main>
+    <div class="coords-box">
+      <p class="pos">
+       ( <span class="lat"></span> &deg; , <span class="long"></span> &deg; )
+      </p>
+    </div>
+    <div class="submit-btn">
+      <button onclick="onFetchBtnClick()" class="fetch-btn">GEO Location</button>
+      <button onclick="refreshing()" class="fetch-btn">Refresh Page</button>
+    </div>
+  </main>
+
+  <script>
+let lat = document.querySelector('.lat');
+let long = document.querySelector('.long');
+const coordsBox = document.querySelector('.coords-box');
+let par;
+// console.log('check geo loc!')
+function preview() {
+ 
+  par = document.createElement('p');
+  par.textContent = 'GEO Location Calulation activated. Please standby and wait...';
+  coordsBox.appendChild(par);
+}
+
+function parClear() {
+  par.textContent = '';
+  // coordsBox.replace(par, par);
+}
+
+function refreshing() {
+  location.reload();
+}
+
+function onFetchBtnClick() {
+ 
+  preview();
+    // const response =  fetch ('/api', options)
+    // const json = response.json()
+    // console.log('', json)
+
+    if('geolocation' in navigator) {
+  // console.log('Geolocation is AVAILABLE!')
+  navigator.geolocation.getCurrentPosition( async (position) => {
+  // navigator.geolocation.getCurrentPosition((position) => {
+  // console.log(position.coords.latitude, position.coords.longitude);
+  console.log(position)
+  lat.textContent = position.coords.latitude;
+  long.textContent = ' '  +  position.coords.longitude;
+  // ;
+
+  const data = { lat: position.coords.latitude, long:  position.coords.longitude };
+  const options = {
+    method:  'POST',
+    headers: {
+      'Content-Type': 'Application/json'
+    },
+    body: JSON.stringify(data)
+  };
+
+  const response = await fetch('/api', options)
+  const json = await response.json()
+  console.log('', json)
+
+  const parIsClear = await parClear()
+  // .then(response => {
+  //   console.log('lattitude response: ',response, response.body.lat, lat.textContent);
+  // });
+  console.log('request options headers body: ', options.body);
+});
+
+
+} else {
+  /* geolocation IS NOT available */
+  console.log('Geolocation is NOT available!')
+}
+  }
+
+
+  </script>
+</body>
+</html>
