@@ -28,11 +28,30 @@
     .long {
       color:coral;
     }
+    input {
+      background: none;
+      border-radius: 1rem;
+      border: 2px solid skyblue;
+      margin: 2rem  1rem 2rem 3rem;
+      padding: 1rem;
+      color: #fff;
+      font-size: 1.2rem;
+      outline: none;
+    }
+    input:hover {
+      border-color: aqua;
+    }
+    input:focus {
+      border-color: lawngreen;
+    }
     .submit-btn {
       text-align: center;
       margin: 2rem auto;
     }
-    .fetch-btn {
+    #add-to {
+      padding: 0.5rem;
+    }
+    .fetch-btn, .add-btn {
       background-color: darkblue;
       color: aqua;
       border: 1.5px solid aqua;
@@ -51,6 +70,12 @@
       <p class="pos">
        ( <span class="lat"></span> &deg; , <span class="long"></span> &deg; )
       </p>
+
+      <div class="input__div">
+        <label for="add-to">Add to DataBase</label>
+        <input value="" type="text" id="add-to">
+        <button onclick="addToDb()" class="add-btn">ADD</button>
+      </div>
     </div>
     <div class="submit-btn">
       <button onclick="onFetchBtnClick()" class="fetch-btn">GEO Location</button>
@@ -61,8 +86,15 @@
   <script>
 let lat = document.querySelector('.lat');
 let long = document.querySelector('.long');
+let input = document.querySelector('input');
 const coordsBox = document.querySelector('.coords-box');
-let par;
+let par, val;
+
+function addToDb() {
+  val = input.value;
+  console.log('input val: ', val)
+  inputClear()
+}
 // console.log('check geo loc!')
 function preview() {
  
@@ -78,6 +110,12 @@ function parClear() {
 
 function refreshing() {
   location.reload();
+}
+
+function inputClear() {
+  setTimeout(() => {
+     input.value = '';
+  }, 2000) 
 }
 
 function onFetchBtnClick() {
@@ -97,7 +135,7 @@ function onFetchBtnClick() {
   long.textContent = ' '  +  position.coords.longitude;
   // ;
 
-  const data = { lat: position.coords.latitude, long:  position.coords.longitude };
+  const data = { lat: position.coords.latitude, long:  position.coords.longitude, value: val };
   const options = {
     method:  'POST',
     headers: {
@@ -108,12 +146,14 @@ function onFetchBtnClick() {
 
   const response = await fetch('/api', options)
   const json = await response.json()
-  console.log('', json)
+  console.log('json:', json)
 
   const parIsClear = await parClear()
   // .then(response => {
   //   console.log('lattitude response: ',response, response.body.lat, lat.textContent);
   // });
+
+  // const resetInput = await inputClear()
   console.log('request options headers body: ', options.body);
 });
 
