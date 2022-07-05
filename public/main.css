@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #353535;
+  background-image: url('./bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: #ffff;
+}
+.nav {
+  display: flex;
+  width: 100%;
+  position: sticky;
+  left: 0;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid lawngreen;
+  background: #000;
+  height: 5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+.nav a {
+  color: lawngreen;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  transition: color 400ms ease;
+}
+
+.nav a:hover {
+  color: #fff;
+}
+
+.title {
+  color: aqua;
+  text-align: center;
+  margin: 1rem auto;
+}
+
+h3.title {
+  text-align: left;
+}
+
+.coords-box {
+  width: 90vw;
+  border: 2px solid aqua;
+  min-height: 50vh;
+  padding: 1.5rem;
+  margin: 2rem auto;
+}
+
+/***********************************************
+*   INDEX.HTML  specific
+*************************************************/
+.lat {
+  color:chartreuse;
+}
+.long {
+  color:coral;
+}
+input {
+  background: none;
+  border-radius: 1rem;
+  border: 2px solid skyblue;
+  margin: 2rem  1rem 2rem 3rem;
+  padding: 1rem;
+  color: #fff;
+  font-size: 1.2rem;
+  outline: none;
+}
+input:hover {
+  border-color: aqua;
+}
+input:focus {
+  border-color: lawngreen;
+}
+.submit-btn {
+  text-align: center;
+  margin: 2rem auto;
+}
+#add-to {
+  padding: 0.5rem;
+}
+.fetch-btn, .add-btn {
+  background-color: darkblue;
+  color: aqua;
+  border: 1.5px solid aqua;
+  padding: 0.3rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+/**************************************************
+*         DB-CONTENT.html
+***********************************************/
+body.db {
+  background-attachment:fixed;
+}
+
+.nav a.db-menu-link {
+  color: coral;
+}
+
+.nav.db-content {
+  border-bottom-color: coral;
+}
+
+.nav a.db-menu-link:hover {
+  color: aqua;
+}
+
+table {
+  padding: 0.5rem;
+  /* border: 1px solid coral; */
+  border-color: coral;
+  width: 50%;
+  margin: 2rem auto;
+  font-size: 1.4rem;
+}
+
+th {
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  text-align: center;
+  background-color: rgb(173, 57, 14);
+  /* background-color: rgb(103, 8, 210); */
+  /* border: 1px solid coral; */
+  /* color: #000; */
+}
+
+tr {
+  border: 1px solid #fff;
+}
+
+td {
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+}
+
+.box.dbc {
+  border-color: coral;
+  font-size: 1.4rem;
+}
+p.content {
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.date-string {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+span.lat {
+  margin-right: 1rem;
+}
+/*************************************************
+*     PLAY GROUND.html
+***************************************************/
+.nav.play a {
+  color: rgb(133, 68, 218);
+}
+
+.nav.play a:hover {
+  color: aqua;
+}
+
+.nav.play {
+  border-bottom-color: rgb(133, 68, 218);
+}
+
+div.box {
+  width: 90vw;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  background-color: #000;
+  border: 1px solid  rgb(133, 68, 218);
+  border-radius: 0.4rem;
+}

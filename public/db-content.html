@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./main.css">
+  <title>Ratabaase Content</title>
+</head>
+<body  class="db">
+  <div class="nav db-content">
+    <a class="db-menu-link" href="./db-content.html">DB Content</a>
+    <a class="db-menu-link" href="./index.html">Home</a>
+    <a class="db-menu-link" href="./play-ground.html">Play Ground</a>
+  </div>
+
+  <h1 class="title">Database Content</h1>
+  <div class="content">
+
+    <table border="2"">
+      <tr>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Input Value</th>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="box dbc">
+    <h3 class="title">Paragraph Title</h3>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia maxime reprehenderit autem quidem! Tempora eveniet ratione recusandae cupiditate maxime doloribus earum ea est, culpa amet.
+  </div>
+
+
+  <script>
+    let data;
+    getData();
+    async function getData() {
+      const response = await fetch('/api')
+      data = await response.json()
+      console.log(data);
+      for (const item of data) {
+      let div = document.createElement('div');
+      let h3 = document.createElement('h3');
+      let p = document.createElement('p');
+      let timeDate = document.createElement('p');
+      let parValue = document.createElement('p');
+      let spanLat = document.createElement('span');
+      let spanLong = document.createElement('span');
+      div.className = 'box dbc';
+      h3.className = 'title';
+      p.className = 'content';
+      timeDate.className = 'date-string';
+      spanLat.className = 'lat';
+      spanLong.className = 'long';
+      let datestr = new Date(item.timestamp).toLocaleString();
+      timeDate.textContent = `Date & Time : x
+      ${datestr} `;
+      h3.textContent = `ID: ${item._id}`;
+      parValue.textContent = `Mood State: ${item.value}`;
+      spanLat.textContent = `Latitude: ${item.lat}`;
+      spanLong.textContent = `Longitude: ${item.long}`;
+      p.append(spanLat, spanLong)
+      div.append(h3, timeDate, parValue, p)
+      document.body.appendChild(div);
+
+      }
+    }
+
+  </script>
+</body>
+</html>
